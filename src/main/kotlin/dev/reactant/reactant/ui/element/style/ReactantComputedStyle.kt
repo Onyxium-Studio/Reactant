@@ -181,7 +181,7 @@ class ReactantComputedStyle(val el: ReactantUIElement) {
         val autoMarginSpace get() = (max(0, widthPerRow - width) / totalAutoMargin)
 
         val rowHeight
-            get() = children.map { it.computedStyle!!.offsetHeight + it.computedStyle!!.marginTop + it.computedStyle!!.marginBottom }.max()
+            get() = children.map { it.computedStyle!!.offsetHeight + it.computedStyle!!.marginTop + it.computedStyle!!.marginBottom }.maxOrNull()
                     ?: 0
 
         fun canInsert(el: ReactantUIElement): Boolean = width == 0 || width + el.offsetWidth <= widthPerRow
@@ -209,7 +209,7 @@ class ReactantComputedStyle(val el: ReactantUIElement) {
         }
 
         if (revisedWidth is PositioningFitContent) {
-            offsetWidth = (childrenRows.map { it.width }.max() ?: 0) + paddingLeft + paddingRight
+            offsetWidth = (childrenRows.map { it.width }.maxOrNull() ?: 0) + paddingLeft + paddingRight
         }
     }
 
@@ -225,7 +225,7 @@ class ReactantComputedStyle(val el: ReactantUIElement) {
             } else {
                 row.children.filter { it.height !is PositioningAutoValue }.forEach { it.computedStyle!!.computeOffsetHeightOnly(0) }
                 row.children.forEach { it.computedStyle!!.let { if (it.revisedHeight is PositioningFitContent) it.computeChildrenPosition() } }
-                val suggestingAutoHeight = row.children.map { it.offsetHeight }.max()
+                val suggestingAutoHeight = row.children.map { it.offsetHeight }.maxOrNull()
                 row.children.filter { it.height is PositioningAutoValue }.forEach { it.computedStyle!!.computeOffsetHeightOnly(suggestedAutoHeight) }
                 row.children.forEach { it.computedStyle!!.computeChildrenPosition() }
             }

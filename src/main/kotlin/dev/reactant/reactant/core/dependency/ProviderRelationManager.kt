@@ -47,7 +47,7 @@ class ProviderRelationManager {
             if (fromDependency != null) walked[fromDependency.first] = fromDependency.second
             if (walked.contains(dependency)) throw CyclicDependencyRelationException(dependency, walked)
             return (depth[dependency] // if cache exist
-                    ?: nodes[dependency]!!.required.map { getDependencyDepth(it.key.dependency, dependency to it.value, LinkedHashMap(walked)) + 1 }.max() // from max depth + 1
+                    ?: nodes[dependency]!!.required.map { getDependencyDepth(it.key.dependency, dependency to it.value, LinkedHashMap(walked)) + 1 }.maxOrNull() // from max depth + 1
                     ?: 0) // 0 if no required providers
         }
         nodes.keys.forEach {

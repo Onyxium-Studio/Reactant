@@ -3,7 +3,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
-val kotlinVersion = "1.4.21"
+val kotlinVersion = "1.5.10"
 
 group = "dev.reactant"
 
@@ -11,7 +11,7 @@ plugins {
     java
     `maven-publish`
     signing
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.5.10"
     id("com.github.johnrengelman.shadow") version "5.0.0"
     id("org.jetbrains.dokka") version "0.10.0"
     id("com.palantir.git-version") version "0.12.3"
