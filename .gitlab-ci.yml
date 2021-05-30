@@ -17,7 +17,7 @@ publish:
   script:
     - ./gradlew --build-cache publish
   cache:
-    key: "$ci_commit_ref_name"
+    key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
       - build

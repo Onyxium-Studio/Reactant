@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
@@ -12,8 +11,8 @@ plugins {
     `maven-publish`
     signing
     kotlin("jvm") version "1.5.10"
-    id("com.github.johnrengelman.shadow") version "5.0.0"
-    id("org.jetbrains.dokka") version "0.10.0"
+    id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("org.jetbrains.dokka") version "1.4.32"
     id("com.palantir.git-version") version "0.12.3"
 }
 
@@ -82,13 +81,12 @@ dependencies {
 
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
-val dokka = (tasks["dokka"] as DokkaTask).apply {
-    outputFormat = "html"
+
+val dokkaHtml = tasks.dokkaHtml.apply {
 }
 
-val dokkaJavadoc by tasks.registering(DokkaTask::class) {
-    outputFormat = "javadoc"
-    outputDirectory = "$buildDir/javadoc"
+val dokkaJavadoc = tasks.dokkaJavadoc {
+    outputDirectory.set(buildDir.resolve("javadoc"))
 }
 
 gradle.taskGraph.whenReady {
@@ -120,9 +118,9 @@ val shadowJar = (tasks["shadowJar"] as ShadowJar).apply {
 }
 
 val dokkaJar by tasks.registering(Jar::class) {
-    dependsOn(dokka)
+    dependsOn(dokkaHtml)
     archiveClassifier.set("dokka")
-    from(tasks.dokka)
+    from(tasks.dokkaHtml)
 }
 
 val deployPlugin by tasks.registering(Copy::class) {
