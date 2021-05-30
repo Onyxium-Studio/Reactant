@@ -82,10 +82,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
 
-val dokkaHtml = tasks.dokkaHtml.apply {
-}
-
-val dokkaJavadoc = tasks.dokkaJavadoc {
+tasks.dokkaJavadoc.configure {
     outputDirectory.set(buildDir.resolve("javadoc"))
 }
 
@@ -104,7 +101,7 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 val javadocJar by tasks.registering(Jar::class) {
-    dependsOn(dokkaJavadoc)
+    dependsOn(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")
     from(tasks.javadoc)
 }
@@ -118,7 +115,7 @@ val shadowJar = (tasks["shadowJar"] as ShadowJar).apply {
 }
 
 val dokkaJar by tasks.registering(Jar::class) {
-    dependsOn(dokkaHtml)
+    dependsOn(tasks.dokkaHtml)
     archiveClassifier.set("dokka")
     from(tasks.dokkaHtml)
 }
