@@ -60,7 +60,7 @@ dependencies {
 
     api("io.reactivex.rxjava3:rxjava:3.0.9")
     api("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    api("org.reflections:reflections:0.9.12")
+    api("io.github.classgraph:classgraph:4.8.106")
 
     api("com.google.code.gson:gson:2.8.6")
     api("org.yaml:snakeyaml:1.26")

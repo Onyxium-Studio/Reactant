@@ -17,8 +17,6 @@ import javassist.ClassPool
 import javassist.CtNewMethod
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 import kotlin.reflect.full.declaredMemberFunctions
@@ -45,8 +43,8 @@ class I18nService(
         // Load all I18nTable interfaces
         @Suppress("UNCHECKED_CAST")
         containerManager.containers
-                .flatMap { it.reflections.getTypesAnnotatedWith(I18n::class.java) }
-                .map { it.kotlin as KClass<out I18nTable> }
+            .flatMap { it.getClassesByAnnotation(I18n::class) }
+            .map { it as KClass<out I18nTable> }
                 .filter {
                     if (it.isFinal) {
                         ReactantCore.logger.error("I18n Table must be a open parameterless concrete class: ${it}")

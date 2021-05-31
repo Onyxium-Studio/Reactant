@@ -1,6 +1,6 @@
 package dev.reactant.reactant.core.component.container
 
-import org.reflections.Reflections
+import io.github.classgraph.ScanResult
 import kotlin.reflect.KClass
 
 /**
@@ -10,5 +10,7 @@ interface Container {
     val componentClasses: Set<KClass<out Any>>
     val displayName: String
     val identifier: String
-    val reflections: Reflections
+    val scanResult: ScanResult
+
+    fun getClassesByAnnotation(annotation: KClass<out Annotation>): Set<KClass<out Any>>
 }
