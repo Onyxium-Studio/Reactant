@@ -51,7 +51,7 @@ dependencies {
     ).forEach { api(kotlin(it, kotlinVersion)) }
 
     implementation("org.bstats:bstats-bukkit:3.0.2") {
-        isTransitive = false
+        // isTransitive = false
     }
 
     api("io.reactivex.rxjava3:rxjava:3.1.6")
