@@ -51,6 +51,7 @@ dependencies {
     ).forEach { api(kotlin(it, kotlinVersion)) }
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
+    api("org.jetbrains.kotlin:kotlin-script-runtime") // scripting support
 
     implementation("org.bstats:bstats-bukkit:3.0.2") {
         // isTransitive = false
