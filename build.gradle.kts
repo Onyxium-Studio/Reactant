@@ -70,10 +70,6 @@ dependencies {
     api("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     api("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    api("net.sourceforge.cssparser:cssparser:0.9.27")
-
-    api("javassist:javassist:3.12.1.GA")
-
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
 
