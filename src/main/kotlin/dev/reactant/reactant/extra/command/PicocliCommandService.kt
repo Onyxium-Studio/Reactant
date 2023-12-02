@@ -1,6 +1,5 @@
 package dev.reactant.reactant.extra.command
 
-import PublishingProfilerDataProvider
 import dev.reactant.reactant.core.ReactantCore
 import dev.reactant.reactant.core.component.Component
 import dev.reactant.reactant.core.component.lifecycle.LifeCycleHook
@@ -8,6 +7,7 @@ import dev.reactant.reactant.core.component.lifecycle.LifeCycleInspector
 import dev.reactant.reactant.core.dependency.injection.Provide
 import dev.reactant.reactant.core.dependency.injection.producer.ComponentProvider
 import dev.reactant.reactant.core.dependency.injection.producer.Provider
+import dev.reactant.reactant.extra.profiler.PublishingProfilerDataProvider
 import dev.reactant.reactant.service.spec.dsl.Registrable
 import dev.reactant.reactant.service.spec.profiler.ProfilerDataProvider
 import org.bukkit.Bukkit

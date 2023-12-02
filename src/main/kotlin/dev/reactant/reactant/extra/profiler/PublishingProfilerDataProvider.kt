@@ -1,3 +1,5 @@
+package dev.reactant.reactant.extra.profiler
+
 import dev.reactant.reactant.core.dependency.injection.producer.Provider
 import dev.reactant.reactant.service.spec.profiler.ProfilerDataProvider
 import io.reactivex.rxjava3.core.Observable
