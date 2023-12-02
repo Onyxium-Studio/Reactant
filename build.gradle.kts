@@ -2,7 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
-val kotlinVersion = "1.5.10"
+val kotlinVersion = "1.9.20"
 
 group = "dev.reactant"
 
@@ -10,10 +10,10 @@ plugins {
     java
     `maven-publish`
     signing
-    kotlin("jvm") version "1.5.10"
-    id("com.github.johnrengelman.shadow") version "5.2.0"
-    id("org.jetbrains.dokka") version "1.4.32"
-    id("com.palantir.git-version") version "0.12.3"
+    kotlin("jvm") version "1.9.20"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("org.jetbrains.dokka") version "1.9.10"
+    id("com.palantir.git-version") version "3.0.0"
 }
 
 group = "dev.reactant"
@@ -48,28 +48,23 @@ dependencies {
     listOf(
         "stdlib-jdk8",
         "reflect"
-//            "script-util",
-//            "script-runtime",
-//            "compiler-embeddable",
-//            "scripting-compiler"
     ).forEach { api(kotlin(it, kotlinVersion)) }
 
-    implementation("org.bstats:bstats-bukkit:1.7") {
+    implementation("org.bstats:bstats-bukkit:3.0.2") {
         isTransitive = false
     }
 
-    api("io.reactivex.rxjava3:rxjava:3.0.9")
+    api("io.reactivex.rxjava3:rxjava:3.1.6")
     api("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    api("io.github.classgraph:classgraph:4.8.106")
+    api("io.github.classgraph:classgraph:4.8.165")
 
-    api("com.google.code.gson:gson:2.8.6")
-    api("org.yaml:snakeyaml:1.26")
+    api("com.google.code.gson:gson:2.10.1")
+    api("org.yaml:snakeyaml:2.0")
     api("com.moandjiezana.toml:toml4j:0.7.2")
 
-    api("info.picocli:picocli:4.3.2")
-    api("org.mariadb.jdbc:mariadb-java-client:2.5.1")
+    api("info.picocli:picocli:4.7.3")
 
-    api("org.apache.logging.log4j:log4j-core:2.12.1")
+    api("org.apache.logging.log4j:log4j-core:2.20.0")
 
     api("com.squareup.retrofit2:retrofit:2.9.0")
     api("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
