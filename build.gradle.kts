@@ -8,6 +8,8 @@ group = "dev.reactant"
 
 plugins {
     java
+    `maven-publish`
+    signing
     kotlin("jvm") version "1.9.20"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.jetbrains.dokka") version "1.9.10"
@@ -77,6 +79,14 @@ tasks.dokkaJavadoc.configure {
     outputDirectory.set(buildDir.resolve("javadoc"))
 }
 
+gradle.taskGraph.whenReady {
+    if (allTasks.any { it is Sign }) {
+        allprojects {
+            extra["signing.keyId"] = System.getenv("SIGNING_KEYID")
+        }
+    }
+}
+
 val sourcesJar by tasks.registering(Jar::class) {
     dependsOn(JavaPlugin.CLASSES_TASK_NAME)
     archiveClassifier.set("sources")
@@ -117,4 +127,68 @@ val build = (tasks["build"] as Task).apply {
         shadowJar,
         deployPlugin
     ).forEach { dependsOn(it) }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            // artifact(sourcesJar.get())
+            // artifact(javadocJar.get())
+            // artifact(dokkaJar.get())
+            // artifact(shadowJar)
+
+            groupId = group.toString()
+            artifactId = project.name
+            version = version
+
+            pom {
+                name.set("Reactant")
+                description.set("An elegant plugin framework for spigot")
+                url.set("https://reactant.dev")
+                licenses {
+                    license {
+                        name.set("GPL-3.0")
+                        url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git@gitlab.com:reactant/reactant.git")
+                    url.set("https://gitlab.com/reactant/reactant/")
+                }
+
+                developers {
+                    developer {
+                        id.set("setako")
+                        name.set("Setako")
+                        organization.set("Reactant Dev Team")
+                        organizationUrl.set("https://gitlab.com/reactant")
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+
+            val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            credentials {
+                username = System.getenv("SONATYPE_USERNAME")
+                password = System.getenv("SONATYPE_PASSWORD")
+            }
+        }
+    }
+}
+
+if (isRelease) {
+    signing {
+        ext["signing.keyId"] = findProperty("signingKeyId") as String?
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey?.replace("\\n", "\n"), signingPassword)
+        sign(publishing.publications["maven"])
+    }
 }
