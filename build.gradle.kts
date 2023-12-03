@@ -26,12 +26,12 @@ val isRelease = details.isCleanTag && !details.lastTag.endsWith("-SNAPSHOT")
 println("Preparing build ${project.name} $version")
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "17"
     kotlinOptions.freeCompilerArgs = listOf("-Xjvm-default=all-compatibility")
 }
 
@@ -46,32 +46,37 @@ repositories {
 
 dependencies {
     listOf(
-        "stdlib-jdk8",
         "reflect"
-    ).forEach { api(kotlin(it, kotlinVersion)) }
+    ).forEach { implementation(kotlin(it, kotlinVersion)) }
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
-    api("org.jetbrains.kotlin:kotlin-script-runtime") // scripting support
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
+    //implementation("org.jetbrains.kotlin:kotlin-script-runtime") // scripting support
+    implementation("org.jetbrains.kotlin:kotlin-scripting-common")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies-maven")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable")
 
     implementation("org.bstats:bstats-bukkit:3.0.2") {
         // isTransitive = false
     }
 
-    api("io.reactivex.rxjava3:rxjava:3.1.6")
-    api("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    api("io.github.classgraph:classgraph:4.8.165")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    implementation("io.github.classgraph:classgraph:4.8.165")
 
-    api("com.google.code.gson:gson:2.10.1")
-    api("org.yaml:snakeyaml:2.0")
-    api("com.moandjiezana.toml:toml4j:0.7.2")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("org.yaml:snakeyaml:2.0")
+    implementation("com.moandjiezana.toml:toml4j:0.7.2")
 
-    api("info.picocli:picocli:4.7.3")
+    implementation("info.picocli:picocli:4.7.3")
 
-    api("org.apache.logging.log4j:log4j-core:2.20.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
 
-    api("com.squareup.retrofit2:retrofit:2.9.0")
-    api("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
-    api("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
