@@ -49,7 +49,7 @@ dependencies {
         "reflect"
     ).forEach { implementation(kotlin(it, kotlinVersion)) }
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
     //implementation("org.jetbrains.kotlin:kotlin-script-runtime") // scripting support
     implementation("org.jetbrains.kotlin:kotlin-scripting-common")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
