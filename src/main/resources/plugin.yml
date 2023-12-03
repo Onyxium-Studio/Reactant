@@ -1,4 +1,4 @@
 name: Reactant
 main: dev.reactant.reactant.core.ReactantCore
-version: 0.2.3
+version: 0.2.3a
 api-version: "1.14"
