@@ -62,21 +62,21 @@ dependencies {
         // isTransitive = false
     }
 
-    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
-    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    implementation("io.github.classgraph:classgraph:4.8.165")
+    api("io.reactivex.rxjava3:rxjava:3.1.6")
+    api("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    api("io.github.classgraph:classgraph:4.8.165")
 
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.yaml:snakeyaml:2.0")
-    implementation("com.moandjiezana.toml:toml4j:0.7.2")
+    api("com.google.code.gson:gson:2.10.1")
+    api("org.yaml:snakeyaml:2.0")
+    api("com.moandjiezana.toml:toml4j:0.7.2")
 
-    implementation("info.picocli:picocli:4.7.3")
+    api("info.picocli:picocli:4.7.3")
 
-    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+    api("org.apache.logging.log4j:log4j-core:2.20.0")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    api("com.squareup.retrofit2:retrofit:2.9.0")
+    api("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+    api("com.squareup.retrofit2:converter-gson:2.9.0")
 
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
