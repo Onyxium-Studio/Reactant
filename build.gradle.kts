@@ -78,8 +78,12 @@ dependencies {
     api("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     api("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    api("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.13.0")
-    api("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.13.0")
+    api("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.13.0") {
+        exclude(group = "org.jetbrains.kotlin")
+    }
+    api("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.13.0") {
+        exclude(group = "org.jetbrains.kotlin")
+    }
 
     compileOnly("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
@@ -180,7 +184,6 @@ publishing {
 
     repositories {
         maven {
-
             val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
             val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
             url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
